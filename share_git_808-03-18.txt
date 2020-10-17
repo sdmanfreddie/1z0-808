@@ -1,0 +1,194 @@
+
+  *********--*************************************************************************************
+  * Q18    :: What is the result of following ? ( single selection )
+  *        :: 以下代码的结果是什么 ？（ 单选 ）
+  *********--*************************************************************************************
+  *
+  *  // define ./Test.java
+  *
+  *  1: public class Test {
+  *
+  *  2:   public static void main ( String[] argu ) {
+  *
+  *  3:     List<Integer> list = new ArrayList<>();
+  *  4:     list.add(  1  );
+  *  5:     list.add(  2  );
+  *  6:     list.add( "3" );
+  *  
+  *         for ( Integer i : list ) {
+  *             System.out.print( i + " " );
+  *         }
+  * 
+  *  4:   }
+  *
+  *     }
+  * 
+  * A: 1 2 3
+  * B: 1 2
+  * C: 1 2 followed by an exception
+  * D: compil fail at line 5.
+  * E: compil fail at line 6.
+  *
+  *
+  *						
+
+
+  *********--*************************************************************************************
+  * note   :: generic in java :
+  *********--*************************************************************************************
+  *
+  *  1) generic is an checker, it check each type of element witch will add into your container
+  *
+  *  2) about class level and method level generic ::
+  *     
+  *     see here :: 
+  *     ------------------------------------------------------------------------
+  *       clear ; sh jrunscrip.sh \
+  *       '--content=
+  *          System.out.println( "\ncase 1) :: " );
+  *          System.out.println( "-------------------------------" );
+  *          Util<ArrayList> util = new Util<>();
+  *          List list = util.<List>convert( new ArrayList( List.of(1,2,3) ) );
+  *          System.out.println( list );
+  *          
+  *          System.out.println( "\ncase 2) :: " );
+  *          System.out.println( "-------------------------------" );
+  *          Util2 util2 = new Util2();
+  *          List list2 = util2.convert( new ArrayList( List.of(10,20,30) ) );
+  *          System.out.println( list2 );
+  *       ' \
+  *       '--classes=
+  *          class Util <T> {
+  *            public <R> R convert( T t ) { return (R)t; };
+  *          }
+  *          class Util2 extends Util<ArrayList> {
+  *            public List convert( ArrayList list ) { return (List)list; };
+  *          }
+  *       '
+  *     ------------------------------------------------------------------------
+  *     
+  *       ps: case 1 using class level and method level generic. this is the same 
+  *           with case 2 using extends.
+  *
+  *
+  *
+  
+  
+  *********--*************************************************************************************
+  * ans at line 165 ::
+  *********--*************************************************************************************
+
+  try it :: 
+  _____________________________________________________________					
+      
+    clear ; sh jrunscrip.sh \
+    '--content=
+       List<Integer> list = new ArrayList<>();
+       list.add(  1  );
+       list.add(  2  );
+       list.add( "3" );
+       
+       for ( Integer i : list ) {
+         System.out.print( i + " " );
+       }
+    '
+    
+    clear ; sh jrunscrip.sh \
+    '--content=
+       List list = new ArrayList( Arrays.asList( 1,2,3,"4" ) );
+       
+       for ( Object o : list ) {
+         System.out.print( o + " " );
+       }
+    '
+    
+    clear ; sh jrunscrip.sh \
+    '--content=
+       List list1 = new ArrayList( Arrays.asList( 1,2,3,"4" ) );
+       
+       List<Integer> list2 = list1;
+       
+       // for ( Integer o : list2 ) {
+       for ( Object o : list2 ) {
+         System.out.print( o + " " );
+       }
+    '
+    
+    clear ; sh jrunscrip.sh \
+    '--content=
+       Util<ArrayList> util = new Util<>();
+       List list = util.<List>convert( new ArrayList( List.of(1,2,3) ) );
+       System.out.println( list );
+    ' \
+    '--classes=
+       class Util <T> {
+         public <R> R convert( T t ) { return (R)t; };
+       }
+    '
+    
+    clear ; sh jrunscrip.sh \
+    '--content=
+       System.out.println( "\ncase 1) :: " );
+       System.out.println( "-------------------------------" );
+       Util<ArrayList> util = new Util<>();
+       List list = util.<List>convert( new ArrayList( List.of(1,2,3) ) );
+       System.out.println( list );
+       
+       System.out.println( "\ncase 2) :: " );
+       System.out.println( "-------------------------------" );
+       Util2 util2 = new Util2();
+       List list2 = util2.convert( new ArrayList( List.of(10,20,30) ) );
+       System.out.println( list2 );
+    ' \
+    '--classes=
+       class Util <T> {
+         public <R> R convert( T t ) { return (R)t; };
+       }
+       class Util2 extends Util<ArrayList> {
+         public List convert( ArrayList list ) { return (List)list; };
+       }
+    '
+
+    clear ; sh jrunscrip.sh \
+    '--content=
+       System.out.println( "\ncase 3) :: " );
+       System.out.println( "-------------------------------" );
+       Stream<String> s = Stream.<String>of( "1","2","3","4","5" );
+       s.forEach( e -> System.out.print( e + " " ) );
+    '
+
+
+
+
+
+
+  *********--*************************************************************************************
+  * ans 18 :: E
+  *********--*************************************************************************************
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *       A: 1 2 3
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *       B: 1 2
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *       C: 1 2 followed by an exception
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *       D: compil fail at line 5.
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *  [V]  E: compil fail at line 6.
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *

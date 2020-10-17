@@ -1,0 +1,109 @@
+
+  *********--*************************************************************************************
+  * Q17    :: What are true of following ? ( multiple selection )
+  *        :: 以下代码的结果是什么 ？（ 多选 ）
+  *********--*************************************************************************************
+  *  
+  * A: Arrays.equals( a1, a2 )      return true when array     a1 and a2 have the same content. 
+  * B: ArrayLists.equals( a1, a2 )  return true when ArrayList a1 and a2 have the same content.
+  * C: a1.equals( a2 )              return true when ArrayList a1 and a2 have the same content. 
+  * D: If you will remove a element from empty ArrayList, it will compile successfull.         
+  * E: If you will remove a element from empty ArrayList, it will run     successfull.
+  * F: none of above.
+  *
+  *
+  *						
+
+
+  *********--*************************************************************************************
+  * note   :: 
+  *********--*************************************************************************************
+  *
+  *
+  
+  
+  *********--*************************************************************************************
+  * ans at line 75 ::
+  *********--*************************************************************************************
+
+  try it :: 
+  _____________________________________________________________					
+      
+    clear ; sh jrunscrip.sh \
+    '--content=
+       System.out.println( "\nparted I :: array equal :: " );
+       System.out.println( "---------------------------------------------" );
+       int[] a1 = new int[] {1,2,3,4};
+       int[] a2 = new int[] {1,2,3,4};
+       
+       System.out.println( "ps :: a1 = new int[] {1,2,3,4}" );
+       System.out.println( "ps :: a2 = new int[] {1,2,3,4}" );
+       System.out.println( "Q1 ? a1 equals a2 ? " + ( Arrays.equals( a1, a2 ) ) );
+       
+       // ------------------------------
+       // output :: a1 equal a2 ? true
+       // ------------------------------
+    '
+    
+    clear ; sh jrunscrip.sh \
+    '--content=
+       System.out.println( "\nparted II :: ArrayList equal :: " );
+       System.out.println( "---------------------------------------------" );
+       List<Integer> list1 = new ArrayList( Arrays.asList( 1,2,3,4 ) );
+       List<Integer> list2 = new ArrayList( Arrays.asList( 1,2,3,4 ) );
+       
+       System.out.println( "ps :: list1 = {1,2,3,4}" );
+       System.out.println( "ps :: list2 = {1,2,3,4}" );
+       System.out.println( "Q2 ? list1 equals list2 ? " + ( list1.equals( list2 ) ) );
+       
+       // -------------------------------------
+       // output :: list1 equals list2 ? true
+       // -------------------------------------
+    '
+    
+    clear ; sh jrunscrip.sh \
+    '--content=
+       System.out.println( "\nparted III :: ArrayList method remove :: " );
+       System.out.println( "---------------------------------------------" );
+       List<Integer> list1 = new ArrayList();
+       list1.remove( 0 );
+    '
+
+
+
+
+  *********--*************************************************************************************
+  * ans 17 :: A, C, D
+  *********--*************************************************************************************
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *  [V]  A: Arrays.equals( a1, a2 ) return true when array a1 and a2 have the same content.
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *       B: ArrayLists.equals( a1, a2 ) return true when ArrayList a1 and a2 have the same content.
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *  [V]  C: a1.equals( a2 ) return true when ArrayList a1 and a2 have the same content.
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *  [V]  D: If you will remove a element from empty ArrayList, it will compile successfull.
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *       E: If you will remove a element from empty ArrayList, it will run     successfull.
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *       F: none of above.
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *

@@ -1,0 +1,138 @@
+
+  *********--*************************************************************************************
+  * Q06    :: How to change following code to get result B ? ( mutiple selection )
+  *        :: 如何更改以下代码以获取结果 B ？（ 多选 ）
+  *********--*************************************************************************************
+  *
+  *  // define ./Test.java
+  *
+  *     1: public class Test {
+  *     
+  *     2:   public static void main(String[] args) {
+  *     
+  *     3:     int  score = 65;
+  *
+  *     4:     if( y < 65 ) System.out.println( "C" );
+  *
+  *     5:     else         System.out.println( "B" );
+  *
+  *     6:     else         System.out.println( "A" );
+  *
+  *     7:   } // end method main
+  *     
+  *     8: } // end class Test
+  *
+  *  A: nothong to do. code already compile successful.
+  *
+  *  B: change code at line 4 to if      ( score <= 80 ) System.out.println( "C" );
+  *     change code at line 5 to else if ( score <= 65 ) System.out.println( "B" );
+  *
+  *  C: change code at line 4 to if      ( score >= 80 ) System.out.println( "A" );
+  *     change code at line 5 to else if ( score >= 65 ) System.out.println( "B" );
+  *     change code at line 6 to else                    System.out.println( "C" );
+  *
+  *  D: change code at line 5 to else if ( score <  80 ) System.out.println( "B" );
+  *	
+  *
+  *						
+
+
+  *********--*************************************************************************************
+  * note   :: if syntax in java :
+  *********--*************************************************************************************
+  *	
+  * note : if syntax A ... 
+  *
+  *    if ( condition a ) {
+  *       // do something if a == true
+  *
+  *    } else {
+  *       // do others
+  *
+  *    }
+  *	
+  *
+  * note : if syntax B ... 
+  *
+  *    if ( condition a ) {
+  *       // do something if a == true
+  *
+  *    } else if ( condition b ) {
+  *       // do something if b == true
+  *
+  *    }
+  *	
+  *
+  * note : if syntax C ... 
+  *
+  *    if ( condition a ) {
+  *       // do something if a == true
+  *
+  *    } else {
+  *
+  *      if ( condition b ) {
+  *         // do something if b == true
+  *      } else {
+  *         // do others
+  *      }
+  *
+  *    }
+  *
+  *
+  *
+
+
+  *********--*************************************************************************************
+  * ans at line 110 ::
+  *********--*************************************************************************************
+
+  try it :: 
+  _____________________________________________________________					
+      
+   clear ; sh jrunscrip.sh \
+   '--content=
+      int  score = 65;
+      if      ( score < 65 ) System.out.println( "C" );
+      else if ( score < 80 ) System.out.println( "B" );
+      else                   System.out.println( "A" );
+   '
+
+   clear ; sh jrunscrip.sh \
+   '--content=
+      int  score = 65;
+      if      ( score >= 80 ) System.out.println( "A" );
+      else if ( score >= 65 ) System.out.println( "B" );
+      else                    System.out.println( "C" );
+   '
+
+
+
+
+  *********--*************************************************************************************
+  * ans 06 :: C, D
+  *********--*************************************************************************************
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *       A: nothong to do. code already compile successful.    
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	
+  *  ====------------=----------------------------------------------------------------------------
+  *       B: change code at line 4 to if      ( score <= 80 ) System.out.println( "C" );
+  *          change code at line 5 to else if ( score <= 65 ) System.out.println( "B" );           
+  *  ====------------=----------------------------------------------------------------------------
+  *	
+  *
+  *  ====------------=----------------------------------------------------------------------------
+  *  [V]  C: change code at line 4 to if      ( score >= 80 ) System.out.println( "A" );
+  *          change code at line 5 to else if ( score >= 65 ) System.out.println( "B" );
+  *          change code at line 6 to else                    System.out.println( "C" );
+  *  ====------------=----------------------------------------------------------------------------
+  *
+  *	   
+  *  ====------------=----------------------------------------------------------------------------
+  *  [V]  D: change code at line 5 to else if ( score <  80 ) System.out.println( "B" );
+  *  ====------------=----------------------------------------------------------------------------
+  *       
+  *
+  *

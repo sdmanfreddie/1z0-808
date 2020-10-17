@@ -1,0 +1,221 @@
+
+  *********--*************************************************************************************
+  * Q25    :: This is not a question, just a note for java.time package.
+  *********--*************************************************************************************
+  *
+  *
+  *						
+   
+
+  *********--*************************************************************************************
+  * note   :: java.util.Date VS java.time.LocalDate; java.time.LocalTime; java.time.LocalDateTime;
+  *********--*************************************************************************************
+  *
+  *  1) how to get system date ?
+  *
+  *     01) method of java.util.Date 
+  *
+  *         a) getYear()
+  *         b) getMonth()
+  *         c) getDate()
+  *         d) getHours()
+  *         e) getMinutes()
+  *         f) getSeconds()
+  *
+  *         ex ) clear ; sh jrunscrip.sh \
+  *              '--import=
+  *                 import java.util.Date;
+  *              ' \
+  *              '--content=
+  *                 Date d = new Date();
+  *                 String yy = "" + ( d.getYear() + 1900 ) ;
+  *                 String mm = "" + ( d.getMonth() + 1 )   ;
+  *                 String dd = "" + d.getDate()            ;
+  *                 System.out.println( yy + "-" + mm + "-" + dd );
+  *              '
+  *              
+  *              // --------------------------------
+  *              // output :: 2020-10-17
+  *              // --------------------------------
+  *      
+  *     02) method of java.time.LocalDate : static method now()
+  *
+  *         ex ) clear ; sh jrunscrip.sh \
+  *              '--import=
+  *                 import java.time.LocalDate;
+  *              ' \
+  *              '--content=
+  *                 System.out.println( LocalDate.now() );
+  *              '
+  *
+  *              // --------------------------------
+  *              // output :: 2020-10-17
+  *              // --------------------------------
+  *      
+  *
+  *  2) how to get system time ?
+  *
+  *     01) method of java.util.Date 
+  *
+  *         a) getYear()
+  *         b) getMonth()
+  *         c) getDate()
+  *         d) getHours()
+  *         e) getMinutes()
+  *         f) getSeconds()
+  *
+  *         ex ) clear ; sh jrunscrip.sh \
+  *              '--import=
+  *                 import java.util.Date;
+  *              ' \
+  *              '--content=
+  *                 Date d = new Date();
+  *                 String hh = "" + d.getHours()   ;
+  *                 String mm = "" + d.getMinutes() ;
+  *                 String ss = "" + d.getSeconds() ;
+  *                 System.out.println( hh + ":" + mm + ":" + ss );
+  *              '
+  *
+  *         ex ) clear ; sh jrunscrip.sh \
+  *              '--import=
+  *                 import java.util.Date;
+  *              ' \
+  *              '--method=
+  *                 public static String pad( String v ) {
+  *                   String tmp = "";
+  *                   for ( int i = 0 ; i < ( 2 - v.length() ) ; i++ ) {
+  *                       tmp += "0"; 
+  *                   }
+  *                   return tmp + v;
+  *                 }
+  *              ' \
+  *              '--content=
+  *                 Date d = new Date();
+  *                 String hh = "" + d.getHours()   ;
+  *                 String mm = "" + d.getMinutes() ;
+  *                 String ss = "" + d.getSeconds() ;
+  *                 System.out.println( pad( hh ) + ":" + pad( mm ) + ":" + pad( ss ) );
+  *              '
+  *              
+  *              // --------------------------------
+  *              // output :: 02:25:57
+  *              // --------------------------------
+  *      
+  *     02) method of java.time.LocalDate : static method now()
+  *
+  *         ex ) clear ; sh jrunscrip.sh \
+  *              '--import=
+  *                 import java.time.LocalTime;
+  *              ' \
+  *              '--content=
+  *                 System.out.println( LocalTime.now() );
+  *              '
+  *
+  *              // --------------------------------
+  *              // output :: 02:15:31.075552
+  *              // --------------------------------
+  *      
+  *
+  *  3) set LocalDate, set LocalTime.
+  *      
+  *     01) static method of()
+  *
+  *         ex ) clear ; sh jrunscrip.sh \
+  *              '--import=
+  *                 import java.time.LocalDate;
+  *                 import java.time.LocalDateTime;
+  *              ' \
+  *              '--content=
+  *                 System.out.println( LocalDate.of( 2020,10,10 ) );
+  *                 System.out.println( LocalDateTime.of( 2015, 6, 20, 6, 15, 30 ) );
+  *              '
+  *
+  *              // --------------------------------
+  *              // output :: 2020-10-10
+  *              //           2015-06-20T06:15:30
+  *              // --------------------------------
+  *      
+  *
+  *  4) LocalDate, LocalTime is immutable obj too.
+  *
+  *         TABLE 3.1
+  *        -------------------------------------------------------------------------
+  *                                Can call on   Can call on   Can call on
+  *                                LocalDate ?   LocalTime ?   LocalDateTime ?
+  *        -------------------------------------------------------------------------
+  *          plusYears/minusYears      Yes                         Yes
+  *        _________________________________________________________________________
+  *          plusMonths/minusMonths    Yes                         Yes
+  *        _________________________________________________________________________
+  *          plusWeeks/minusWeeks      Yes                         Yes
+  *        _________________________________________________________________________
+  *          plusDays/minusDays        Yes                         Yes
+  *        _________________________________________________________________________
+  *          plusHours/minusHours                    Yes           Yes
+  *        _________________________________________________________________________
+  *          plusMinutes/minusMinutes                Yes           Yes
+  *        _________________________________________________________________________
+  *          plusSeconds/minusSeconds                Yes           Yes
+  *        _________________________________________________________________________
+  *          plusNanos/minusNanos                    Yes           Yes
+  *        _________________________________________________________________________
+  *      
+  *
+  *  4) working with Periods
+  *
+  *         ex ) clear ; sh jrunscrip.sh \
+  *              '--import=
+  *                 import java.time.*;
+  *              ' \
+  *              '--content=
+  *              
+  *                 LocalDate start_date = LocalDate.of( 2020,01,10 );
+  *                 LocalDate end_date   = LocalDate.of( 2020,12,31 );
+  *              
+  *                 while (  start_date.isBefore( end_date )  ) {
+  *              
+  *                   System.out.println( "get toy date : " + start_date );
+  *
+  *                   // start_date = start_date.plusDays( 28 );
+  *                   // start_date = start_date.plus( Period.ofDays( 28 ) );
+  *                   start_date = start_date.plus( Period.of( 1, 0, 7 ) );
+  *                   
+  *                 }
+  *              '
+  *      
+  *     01) remember you cannot chain methods when creating a Period
+  *
+  *         [ Period.ofYears(1).ofWeeks(1) ] just work as [ Period.ofWeeks(1) ]
+  *      
+  *
+  *  5) Formatting Dates and Times
+  *
+  *         ex ) clear ; sh jrunscrip.sh \
+  *              '--import=
+  *                 import java.time.*;
+  *                 import java.time.format.*;
+  *              ' \
+  *              '--content=
+  *                 LocalDateTime d = LocalDateTime.of( 2015, 5, 10, 11, 22, 33 );
+  *                 Period p = Period.of( 1, 2, 3 );
+  *                 d = d.minus( p );
+  *                 DateTimeFormatter f = DateTimeFormatter.ofLocalizedTime( FormatStyle.SHORT );
+  *                 System.out.println( d.format( f ) );
+  *              '
+  *
+  *         ex ) clear ; sh jrunscrip.sh \
+  *              '--import=
+  *                 import java.time.*;
+  *                 import java.time.format.*;
+  *              ' \
+  *              '--content=
+  *                 LocalDateTime d = LocalDateTime.of( 2015, 5, 10, 11, 22, 33 );
+  *                 Period p = Period.ofDays( 1 ).ofYears( 2 );
+  *                 d = d.minus( p );
+  *                 DateTimeFormatter f = DateTimeFormatter.ofLocalizedDateTime( FormatStyle.SHORT );
+  *                 System.out.println( f.format( d ) );
+  *              '
+  *
+  *
+  *
+
